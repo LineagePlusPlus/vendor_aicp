@@ -148,7 +148,6 @@ PRODUCT_PACKAGES += \
     powertop \
     rsync \
     setcap \
-    unrar \
     unzip \
     vim \
     wget \
