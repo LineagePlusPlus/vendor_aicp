@@ -59,6 +59,7 @@ PRODUCT_PACKAGES += \
     Glimpse \
     Jelly \
     Recorder \
+    LineageBlackTheme \
     ThemePicker \
     ThemesStub \
     Twelve \
