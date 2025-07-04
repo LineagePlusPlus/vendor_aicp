@@ -38,6 +38,7 @@ PRODUCT_PACKAGES += \
 # Optional packages
 PRODUCT_PACKAGES += \
     AppPredictionService \
+    LineageBlackTheme \
     WallpaperPicker2
 
 # Extra tools
