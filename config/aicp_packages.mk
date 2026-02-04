@@ -31,14 +31,13 @@ PRODUCT_PACKAGES += \
     libhealthd.aicp
 endif
 
-# OmniJaws
-PRODUCT_PACKAGES += \
-    OmniJaws
-
 # Optional packages
 PRODUCT_PACKAGES += \
     LineageBlackTheme \
     WallpaperPicker2
+
+PRODUCT_PACKAGES += \
+    GameSpace
 
 # Extra tools
 PRODUCT_PACKAGES += \
