@@ -33,7 +33,6 @@ endif
 
 # Optional packages
 PRODUCT_PACKAGES += \
-    LineageBlackTheme \
     WallpaperPicker2
 
 PRODUCT_PACKAGES += \
