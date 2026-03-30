@@ -31,6 +31,13 @@ PRODUCT_PACKAGES += \
     libhealthd.aicp
 endif
 
+# OmniJaws
+PRODUCT_PACKAGES += \
+    OmniJaws
+
+PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST += \
+    system/etc/permissions/privapp_whitelist_org.omnirom.omnijaws-ext.xml
+
 # Optional packages
 PRODUCT_PACKAGES += \
     WallpaperPicker2
@@ -115,31 +122,12 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     vendor/aicp/prebuilt/common/lib/content-types.properties:$(TARGET_COPY_OUT_PRODUCT)/lib/content-types.properties
 
-# Google extra permissions and features
-PRODUCT_COPY_FILES += \
-    vendor/aicp/config/permissions/com.google.android.dialer.support.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/com.google.android.dialer.support.xml \
-    vendor/aicp/config/permissions/com.google.android.feature.ANDROID_ONE_EXPERIENCE.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/com.google.android.feature.ANDROID_ONE_EXPERIENCE.xml \
-    vendor/aicp/config/permissions/privapp-permissions-google.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/permissions/privapp-permissions-google.xml \
-    vendor/aicp/config/permissions/privapp-permissions-google-product.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/privapp-permissions-google-product.xml \
-    vendor/aicp/config/permissions/privapp-permissions-hotword.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/privapp-permissions-hotword.xml \
-    vendor/aicp/config/permissions/google_build.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/sysconfig/google_build.xml \
-    vendor/aicp/config/permissions/google-hiddenapi-package-whitelist.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/sysconfig/google-hiddenapi-package-whitelist.xml \
-    vendor/aicp/config/permissions/nexus.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/sysconfig/nexus.xml \
-    vendor/aicp/config/permissions/pixel_2016_exclusive.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/sysconfig/pixel_2016_exclusive.xml \
-    vendor/aicp/config/permissions/pixel_2017_exclusive.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/sysconfig/pixel_2017_exclusive.xml \
-    vendor/aicp/config/permissions/pixel_2018_exclusive.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/sysconfig/pixel_2018_exclusive.xml \
-    vendor/aicp/config/permissions/pixel_2019_midyear_exclusive.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/sysconfig/pixel_2019_midyear_exclusive.xml \
-    vendor/aicp/config/permissions/pixel_experience_2017.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/sysconfig/pixel_experience_2017.xml \
-    vendor/aicp/config/permissions/pixel_experience_2018.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/sysconfig/pixel_experience_2018.xml \
-    vendor/aicp/config/permissions/pixel_experience_2019_midyear.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/sysconfig/pixel_experience_2019_midyear.xml
-
-# Permissions for Google product apps
-PRODUCT_COPY_FILES += \
-    vendor/aicp/config/permissions/default-permissions-product.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/default-permissions/default-permissions-product.xml
-
 # AICP overlays
 -include packages/overlays/AICP/product_packages.mk
 
 # Include AICP props
 include vendor/aicp/config/aicp_props.mk
+
+# Include google perms and features
+include vendor/aicp/config/aicp_gms.mk
 

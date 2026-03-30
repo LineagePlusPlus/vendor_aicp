@@ -46,8 +46,10 @@ endif
 # Backup Tool
 PRODUCT_COPY_FILES += \
     vendor/aicp/prebuilt/common/bin/backuptool.sh:install/bin/backuptool.sh \
-    vendor/aicp/prebuilt/common/bin/backuptool.functions:install/bin/backuptool.functions \
-    vendor/aicp/prebuilt/common/bin/50-lineage.sh:$(TARGET_COPY_OUT_SYSTEM)/addon.d/50-lineage.sh
+    vendor/aicp/prebuilt/common/bin/backuptool.functions:install/bin/backuptool.functions
+
+PRODUCT_PACKAGES += \
+    50-lineage.sh
 
 PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST += \
     system/addon.d/50-lineage.sh
@@ -147,8 +149,8 @@ endif
 
 ifeq ($(PRODUCT_IS_AUTOMOTIVE),)
 PRODUCT_PACKAGES += \
-    LineageParts
-#    LineageSetupWizard
+    LineageParts \
+    LineageSetupWizard
 endif
 
 PRODUCT_PACKAGES += \
@@ -278,7 +280,8 @@ CUSTOM_LOCALES += \
     ast_ES \
     gd_GB \
     cy_GB \
-    fur_IT
+    fur_IT \
+    nn_NO
 
 PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += vendor/crowdin/overlay
 PRODUCT_PACKAGE_OVERLAYS += vendor/crowdin/overlay
