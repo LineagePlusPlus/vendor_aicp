@@ -31,12 +31,26 @@ PRODUCT_PACKAGES += \
     libhealthd.aicp
 endif
 
+# System Allow List
+PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST += \
+    system/bin/clean_cache.sh \
+    system/etc/hosts.aicp_adblock \
+    system/etc/permissions/android.software.nfc.beam.xml \
+    system/etc/permissions/android.software.sip.voip.xml \
+    system/etc/permissions/privapp-permissions-aicp.xml \
+    system/etc/permissions/privapp_whitelist_org.omnirom.omnijaws-ext.xml \
+    system/lib/content-types.properties \
+    system/lib64/libsepol.so \
+    system/priv-app/AppPredictionService/AppPredictionService.apk \
+    system/xbin/wget
+
+# OnDeviceAppPrediction
+PRODUCT_PACKAGES += \
+    AppPredictionService
+
 # OmniJaws
 PRODUCT_PACKAGES += \
     OmniJaws
-
-PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST += \
-    system/etc/permissions/privapp_whitelist_org.omnirom.omnijaws-ext.xml
 
 # Optional packages
 PRODUCT_PACKAGES += \
@@ -48,8 +62,10 @@ PRODUCT_PACKAGES += \
 # Extra tools
 PRODUCT_PACKAGES += \
     e2fsck \
+    libsepol \
     mke2fs \
-    tune2fs
+    tune2fs \
+    wget
 
 # Audio
 LOCAL_PATH := frameworks/base/data/sounds
@@ -85,7 +101,7 @@ endif
 
 # Clean cache script
 PRODUCT_COPY_FILES += \
-    vendor/aicp/prebuilt/common/bin/clean_cache.sh:$(TARGET_COPY_OUT_PRODUCT)/bin/clean_cache.sh
+    vendor/aicp/prebuilt/common/bin/clean_cache.sh:$(TARGET_COPY_OUT_SYSTEM)/bin/clean_cache.sh
 
 # system mount
 PRODUCT_COPY_FILES += \
@@ -96,15 +112,12 @@ EXCLUDE_SYSTEMUI_TESTS := true
 
 # AICP permissions
 PRODUCT_COPY_FILES += \
+    vendor/aicp/config/permissions/privapp-permissions-aicp-system.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/privapp-permissions-aicp.xml \
     vendor/aicp/config/permissions/privapp-permissions-aicp-system-ext.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/permissions/privapp-permissions-aicp.xml \
     vendor/aicp/config/permissions/privapp-permissions-aicp-product.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/privapp-permissions-aicp.xml
 
 # Audio files
 $(call inherit-product, vendor/aicp/audio/audio.mk)
-
-# Hidden API whitelist
-PRODUCT_COPY_FILES += \
-    vendor/aicp/config/permissions/lineage-hiddenapi-package-whitelist.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/lineage-hiddenapi-package-whitelist.xml
 
 # Font files
 PRODUCT_COPY_FILES += \
@@ -112,22 +125,18 @@ PRODUCT_COPY_FILES += \
 
 # Enable Android Beam on all targets
 PRODUCT_COPY_FILES += \
-    vendor/aicp/config/permissions/android.software.nfc.beam.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/android.software.nfc.beam.xml
+    vendor/aicp/config/permissions/android.software.nfc.beam.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/android.software.nfc.beam.xml
 
 # Enable SIP+VoIP on all targets
 PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.software.sip.voip.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/android.software.sip.voip.xml
+    frameworks/native/data/etc/android.software.sip.voip.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/android.software.sip.voip.xml
 
 # Copy over added mimetype supported in libcore.net.MimeUtils
 PRODUCT_COPY_FILES += \
-    vendor/aicp/prebuilt/common/lib/content-types.properties:$(TARGET_COPY_OUT_PRODUCT)/lib/content-types.properties
+    vendor/aicp/prebuilt/common/lib/content-types.properties:$(TARGET_COPY_OUT_SYSTEM)/lib/content-types.properties
 
 # AICP overlays
 -include packages/overlays/AICP/product_packages.mk
 
 # Include AICP props
 include vendor/aicp/config/aicp_props.mk
-
-# Include google perms and features
-include vendor/aicp/config/aicp_gms.mk
-
